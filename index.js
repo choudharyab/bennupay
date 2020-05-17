@@ -6,38 +6,32 @@ require("dotenv").config();
 const utils = require(rootDir + "/utils/");
 const bodyParser = require("body-parser");
 const express = require("express");
-const multer = require('multer');
+//const multer = require('multer');
 const cors=require('cors');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
 const app = express();
 const apis = require("./src");
 const response = utils.response
-const swagger = require('./utils/swagger');
-const swaggerDocs = swaggerJsDoc(swagger.swaggerOptions);
-
-//app.use("/api-docs",swaggerUi.server,swaggerUi.setup(swaggerDocs));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
 
 
-var upload = multer();
-var storage = multer.diskStorage({
-    destination: function (req, res, cb) {
-        cb(null, './files');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
-    }
-});
+// var upload = multer();
+// var storage = multer.diskStorage({
+//     destination: function (req, res, cb) {
+//         cb(null, './files');
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now());
+//     }
+// });
 
-upload = multer({
-    limits: {
-        fileSize: 100 * 1024 * 1024,
-        files: 25
-    }, storage: storage
-});
+// upload = multer({
+//     limits: {
+//         fileSize: 100 * 1024 * 1024,
+//         files: 25
+//     }, storage: storage
+// });
 
 
 app.use(function (req, res, next) {
@@ -47,9 +41,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(upload.any());
+//app.use(upload.any());
 
 app.use("/api", apis);
+//app.use("/api-docs",swaggerUi.server,swaggerUi.setup(swaggerDocs));
 
 
 app.use(function (err, req, res, next) {
