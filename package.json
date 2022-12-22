@@ -14,7 +14,7 @@
   "express": "^4.17.1",
   "express-validator": "^6.3.0",
   "http-build-query": "^0.7.0",
-  "jsonwebtoken": "^8.5.1",
+  "jsonwebtoken": "^9.0.0",
   "mongoose": "^5.7.14",
   "multer": "^1.4.2",
   "mysql2": "^2.0.2",
